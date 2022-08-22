@@ -6,6 +6,31 @@ const Button = ({onClick, text}) => {
   )
 }
 
+const Block = ({text, selected, points, anecdotes}) => {
+  return (
+    <div>
+      <h1>{text}</h1>
+      <div>{anecdotes[selected]}</div>
+      <div>has {points[selected]} votes</div>
+    </div>
+  )
+  
+}
+
+function indexOfMax(points) {
+  var max = points[0]
+  var maxIndex = 0
+
+  for (var i = 1; i < Object.keys(points).length; i++) {
+    if (points[i] > max) {
+      maxIndex = i;
+      max = points[i]
+    }
+  }
+
+  return maxIndex
+}
+
 
 
 const App = () => {
@@ -26,11 +51,11 @@ const App = () => {
 
   return (
     <div>
-      <div>{anecdotes[selected]}</div>
-      <div>has {points[selected]} votes</div>
+      <Block text="Anecdote of the Day" selected={selected} points={points} anecdotes={anecdotes}/>
       <Button onClick={() => {copy[selected] += 1
       setPoints(copy)}} text={"vote"}/>
       <Button onClick={() => setSelected(Math.floor(Math.random() * (6 - 0 + 1)) + 0)} text={"next anecdote"}/>
+      <Block text="Anecdote with most votes" selected={indexOfMax(points)} points={points} anecdotes={anecdotes}/>
     </div>
   )
 }
