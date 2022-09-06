@@ -23,8 +23,10 @@ const Header = (props) => {
   }
   
   const Total = (props) => {
-      var total = 0
-      props.parts.map(part => total += part.exercises)
+      var total = props.parts.reduce((s, p) => {
+        return s + p.exercises
+      }, 0
+      )
     return (
       <p>
         <b>total of {total} exercises</b>
