@@ -1,4 +1,7 @@
+import { useState } from "react"
 import Course from "./components/Course.js"
+
+
 const App = () => {
   const courses = [
     {
